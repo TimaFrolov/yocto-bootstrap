@@ -1,0 +1,11 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -1131,7 +1131,7 @@
+   [
+   # GCC 8+ returns $arch-linux-{musl,uclibc} for musl/uClibc based
+   # toolchains confusing python. Fix that up
+-  MULTIARCH=$($CC --print-multiarch 2>/dev/null | sed -E 's/-linux-(musl|uclibc)*$/-linux-gnu/')
++  MULTIARCH=""
+   ]
+ )
+ AC_SUBST([MULTIARCH])

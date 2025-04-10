@@ -1,0 +1,35 @@
+diff --git a/meta/classes-global/insane.bbclass b/meta/classes-global/insane.bbclass
+index 1691d96b64..e403c6cbab 100644
+--- a/meta/classes-global/insane.bbclass
++++ b/meta/classes-global/insane.bbclass
+@@ -30,7 +30,7 @@ WARN_QA ?= "32bit-time native-last pep517-backend"
+ ERROR_QA ?= "dev-so debug-deps dev-deps debug-files arch pkgconfig la \
+             textrel incompatible-license files-invalid \
+             infodir build-deps src-uri-bad symlink-to-sysroot multilib \
+-            invalid-packageconfig host-user-contaminated uppercase-pn \
++            invalid-packageconfig uppercase-pn \
+             mime mime-xdg unlisted-pkg-lics unhandled-features-check \
+             missing-update-alternatives missing-ptest \
+             license-exists license-no-generic license-syntax license-format \
+@@ -50,7 +50,7 @@ ERROR_QA ?= "dev-so debug-deps dev-deps debug-files arch pkgconfig la \
+ ERROR_QA:append = "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', ' usrmerge', '', d)}"
+ WARN_QA:append:layer-core = " missing-metadata missing-maintainer"
+ 
+-FAKEROOT_QA = "host-user-contaminated"
++FAKEROOT_QA = ""
+ FAKEROOT_QA[doc] = "QA tests which need to run under fakeroot. If any \
+ enabled tests are listed here, the do_package_qa task will run under fakeroot."
+ 
+diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
+index 1f31b4fcb3..d9b5378c09 100644
+--- a/meta/conf/bitbake.conf
++++ b/meta/conf/bitbake.conf
+@@ -758,7 +758,7 @@ export PSEUDO_DISABLED = "1"
+ #export PSEUDO_LIBDIR = "${STAGING_DIR_NATIVE}$PSEUDOBINDIR/../lib/pseudo/lib
+ FAKEROOTBASEENV = "PSEUDO_BINDIR=${PSEUDO_SYSROOT}${bindir_native} PSEUDO_LIBDIR=${PSEUDO_SYSROOT}${prefix_native}/lib/pseudo/lib PSEUDO_PREFIX=${PSEUDO_SYSROOT}${prefix_native} PSEUDO_IGNORE_PATHS=${@oe.path.canonicalize(d.getVar('PSEUDO_IGNORE_PATHS'))} PSEUDO_DISABLED=1 PYTHONDONTWRITEBYTECODE=1"
+ FAKEROOTCMD = "${PSEUDO_SYSROOT}${bindir_native}/pseudo"
+-FAKEROOTENV = "PSEUDO_PREFIX=${PSEUDO_SYSROOT}${prefix_native} PSEUDO_LOCALSTATEDIR=${PSEUDO_LOCALSTATEDIR} PSEUDO_PASSWD=${PSEUDO_PASSWD} PSEUDO_NOSYMLINKEXP=1 PSEUDO_IGNORE_PATHS=${@oe.path.canonicalize(d.getVar('PSEUDO_IGNORE_PATHS'))} PSEUDO_DISABLED=0"
++FAKEROOTENV = "PSEUDO_UNLOAD=1"
+ FAKEROOTNOENV = "PSEUDO_UNLOAD=1"
+ FAKEROOTDIRS = "${PSEUDO_LOCALSTATEDIR}"
+ FAKEROOTLOGS = "${WORKDIR}/pseudo/pseudo.log"

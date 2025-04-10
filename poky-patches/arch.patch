@@ -1,0 +1,13 @@
+diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
+index 1f31b4fcb3..d9b5378c09 100644
+--- a/meta/conf/bitbake.conf
++++ b/meta/conf/bitbake.conf
+@@ -126,7 +126,7 @@ BB_RENAMED_VARIABLES[WHITELIST_LGPL-3.0+] = "is deprecated, convert to INCOMPATI
+ 
+ # Immediate expansion since there is no point in repeatedly calling
+ # os.uname() throughout parsing
+-BUILD_ARCH := "${@os.uname()[4]}"
++BUILD_ARCH = "i686"
+ BUILD_OS := "${@os.uname()[0].lower()}"
+ BUILD_VENDOR = ""
+ BUILD_SYS = "${BUILD_ARCH}${BUILD_VENDOR}-${BUILD_OS}"

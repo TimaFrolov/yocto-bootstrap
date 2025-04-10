@@ -1,0 +1,13 @@
+diff --git a/meta/recipes-devtools/pseudo/files/older-glibc-symbols.patch b/meta/recipes-devtools/pseudo/files/older-glibc-symbols.patch
+index c453b5f735..38c2cffa04 100644
+--- a/meta/recipes-devtools/pseudo/files/older-glibc-symbols.patch
++++ b/meta/recipes-devtools/pseudo/files/older-glibc-symbols.patch
+@@ -30,7 +30,7 @@ diff --git a/Makefile.in b/Makefile.in
+  
+  $(LIBPSEUDO): $(WRAPOBJS) pseudo_client.o pseudo_ipc.o $(SHOBJS) | $(LIB)
+ -	$(CC) $(CFLAGS) $(CFLAGS_PSEUDO) -shared -o $(LIBPSEUDO) \
+-+	$(CC) $(CFLAGS)  -Lprebuilt/$(shell uname -m)-linux/lib/ $(CFLAGS_PSEUDO) -shared -o $(LIBPSEUDO) \
+++	$(CC) $(CFLAGS)  -Lprebuilt/$(shell $CC -dumpmachine | cut -f 1 -d -)-linux/lib/ $(CFLAGS_PSEUDO) -shared -o $(LIBPSEUDO) \
+  		pseudo_client.o pseudo_ipc.o \
+  		$(WRAPOBJS) $(SHOBJS) $(LDFLAGS) $(CLIENT_LDFLAGS)
+  
